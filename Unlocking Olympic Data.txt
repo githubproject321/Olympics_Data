@@ -97,8 +97,7 @@ SQL Queries:::::::
 ---select distinct year, season, city from olympics_history 
 order by year;
 
-3)
-Mention the total number of nations who participated in each olympics game?. Order the results by games.
+3)Mention the total number of nations who participated in each olympics game?. Order the results by games.
  
 (Hint: You can group the data by games and region, and then count the number of unique regions in each game to determine the total number of nations participating. Finally, sort the results by games.)
 ---select o.Games, count(distinct oh.region) as total_nations
@@ -108,8 +107,7 @@ on o.NOC = oh.NOC
 group by Games
 order by Games;
 
-4)
-Which nation has participated in all of the olympic games? and order the output by first column which is fetched
+4)Which nation has participated in all of the olympic games? and order the output by first column which is fetched
  
 (Hint: To find the nation that has participated in all Olympic games, you can calculate the total number of distinct games in the dataset and count the number of games each country has participated in. Then, join these two subqueries based on the total number of games. Finally, sort the output by the first column fetched.)
 ---SELECT olympics_history_noc_regions.region, COUNT(DISTINCT olympics_history.games) AS total_games_participated
@@ -123,15 +121,13 @@ Which nation has participated in all of the olympic games? and order the output 
 ---select count(distinct name) as athletes_won_gold from olympics_history
 where Medal = 'Gold';
 
-6)
-Which Sports were just played only once in the olympics? and Order the output by Sports. output should include number of games.
+6)Which Sports were just played only once in the olympics? and Order the output by Sports. output should include number of games.
  
 (Hint: To find the sports that were played only once in the Olympics, you can start by selecting distinct combinations of games and sports. Then, in a separate subquery, count the number of games each sport was played. Join these two subqueries based on the sport column and filter for sports with a count of 1. Finally, sort the output by the sport column.)
 ---select distinct sport,count(distinct games) as no_of_games,games from olympics_history group by sport
 having no_of_games=1 order by sport;  
 
-7)
-Fetch the total number of sports played in each olympic games. Order by no of sports by descending.
+7)Fetch the total number of sports played in each olympic games. Order by no of sports by descending.
  
 (Hint: To determine the total number of sports played in each Olympic game, you can start by selecting distinct combinations of games and sports. Then, in a separate subquery, count the number of sports for each game. Finally, sort the output by the number of sports in descending order.)
 ---select distinct games, count(distinct sport) as no_of_sport from olympics_history group by games order by sport asc;
@@ -144,8 +140,7 @@ FROM (select name, age, sex, team, games, city,  sport, event, medal, RANK() ove
       where medal = 'Gold') as oldest_athlete
       group by medal;
 
-9)
-Top 5 athletes who have won the most gold medals. Order the results by gold medals in descending.
+9)Top 5 athletes who have won the most gold medals. Order the results by gold medals in descending.
  
 (Hint: Create a temporary table counting the total number of gold medals for each athlete. Rank the athletes using dense_rank(). Select the top 5 athletes based on their rank, ordering them by the total gold medals in descending order.)
 ---
@@ -155,8 +150,7 @@ group by name, team
 order by count(medal) desc
 limit 5;
 
-10)
-Top 5 athletes who have won the most medals (gold/silver/bronze). Order the results by medals in descending.
+10)Top 5 athletes who have won the most medals (gold/silver/bronze). Order the results by medals in descending.
  
 (Hint: Create a temporary table counting the total number of medals for each athlete. Rank the athletes using dense_rank(). Select the top 5 athletes based on their rank, ordering them by the total number of medals in descending order.)
 ---with t1 as
@@ -170,8 +164,7 @@ Top 5 athletes who have won the most medals (gold/silver/bronze). Order the resu
     from t2
     limit 5;
 
-11)
-Top 5 most successful countries in olympics. Success is defined by no of medals won.
+11)Top 5 most successful countries in olympics. Success is defined by no of medals won.
  
 (Hint: Create a temporary table counting the total number of medals for each country. Rank the countries using dense_rank(). Select the top 5 countries based on their rank, ordering them by the total number of medals in descending order.)
 ---WITH
@@ -200,8 +193,7 @@ FROM
     t1
 LIMIT 5
 
-12)
-In which Sport/event, India has won highest medals.
+12)In which Sport/event, India has won highest medals.
  
 (Hint: Create a temporary table counting the total number of medals for each sport/event where India has won. Rank the sport/events using rank(). Select the sport/event with the highest rank (1) from the temporary table.)
 ---WITH t1 AS (
